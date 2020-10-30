@@ -1,2 +1,3 @@
-# PEER_workshop
+# Pre workshop
  
+## For those working on Windows machines:
