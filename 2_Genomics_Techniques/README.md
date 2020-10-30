@@ -1,7 +1,7 @@
 # Session 2: Genomics Techniques
 This session will provide an overview for understanding FASTQ file formats, interpreting read quality, mapping to a reference, and calling genomic variants. It is derived from the [Data Wrangling and Processing for Genomics Lesson](https://datacarpentry.org/wrangling-genomics/) from [Data Carpentry](https://datacarpentry.org/lessons/) which provides a much better and in-depth view of these topics.  
 
-To facilitate analysis on your local machine, a smaller dataset (instead of the <i>E. coli</i> used for the Data Carpentry lession) is provided. Additional support is provided to  running your local machine. 
+To facilitate analysis on your local machine, a smaller dataset (instead of the <i>E. coli</i> used for the Data Carpentry lession) is provided. 
 
 ## Prior to the session: 
  
