@@ -23,6 +23,7 @@ $ tar jxvf samtools-1.9.tar.bz2
 $ cd samtools-1.9
 $ make
 ```
+
 - **[bcftools](http://samtools.github.io/bcftools/bcftools.html):**
 ```
 $ curl -OkL https://github.com/samtools/bcftools/releases/download/1.8/bcftools-1.8.tar.bz2
@@ -35,7 +36,7 @@ $ make
 ## 2a: The FASTQ format:
 See Section 2 of the Data Carpentry lesson [here](https://datacarpentry.org/wrangling-genomics/02-quality-control/index.html) for an in-depth description.
 
-Download the two example files in this repository, `SH009_R1.fastq` and `SH009_R2.fastq`. These files include a subset of reads from a *Striga hermonthica* individual collected in a field of maize in Mumias, Kenya in by Emily Bellis, Sylvia Mutinda, Calvins Odero, and Steven Runo in 2018.
+Download the two example files in this repository, `SH009_R1.fastq` and `SH009_R2.fastq` to a new working directory. These files include a subset of reads from a *Striga hermonthica* individual collected in a field of maize in Mumias, Kenya by Emily Bellis, Sylvia Mutinda, Calvins Odero, and Steven Runo in 2018.
 
 Navigate to the directory on your computer where these files were downloaded. Inspect the first sequence in each read file using the `head` command. Is this sequence of good quality?
 ```
@@ -61,11 +62,64 @@ $ fastq *.fastq
 
 Alternatively, [FastQC can be run interactively](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/INSTALL.txt) using the graphical user interface. 
 
-## 2c. Mapping reads to the reference with BWA:
-See Section 4[here](https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html) for full details. Note, we will be skipping the quality trimming and filtering steps today; the reads in this repository have already been trimmed and filtered using [BBDuk](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/). 
+## 2c. Mapping reads to the reference with BWA (MacOS/Linux):
+See Section 4 [here](https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html) for full details. Note, we will be skipping the quality trimming and filtering steps (Section 3) today; the reads we are using have already been trimmed and filtered using [BBDuk](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/).
+
+First, we must download the reference. It will be easiest if you download to the same directory where you have the read files. The reference we are using as an example is actually just 1 sequence, that of a transcript for a pectin methylesterase inhibitor gene from *Striga hermonthica*.  Typically though we would use a genome reference consisting of multiple chromosomes or contigs.
+
+Inside the directory where you have the file, inspect the reference sequence. It is a `.fasta` file, with the sequence id preceded by a `>` on one line, followed by the sequence on the following lines. In this case the sequence is wrapped across several lines.  
+```
+$ cat Sther_PMEI.fasta 
+```
+
+Next, index the reference sequence with `bwa`. Unless you have added the bwa program to your PATH environment variable (outside the scope of this workshop), you may need to specify the full file path to where you downloaded the bwa program. 
+```
+$ bwa index Sther_PMEI.fasta
+```
+
+Third, map the forward and reverse read files for sample 'SH009' to the reference with the `bwa mem` algorithm. After the mapping has finished, we can inspect the resulting `.sam` file since it is a human readable format.
+```
+$ bwa mem SH009_R1.fastq SH009_R2.fastq > SH009.aligned.sam 
+$ cat SH009.aligned.sam
+```
+
+This file is actually pretty small! Most `.sam` files can be much bigger. See how big it is with:
+```
+$ du -sh SH009.aligned.sam
+```
+
+We will create a compressed version (a `.bam` file) that is smaller and more efficient for processing by computers. We use `samtools view` to convert the file, and `samtools sort` to sort it. Again, you may have to specfify the full path to the `samtools` program.
+```
+$ samtools view -S -b SH009.aligned.sam > SH009.aligned.bam
+$ samtools sort SH009.aligned.bam > SH009.aligned.sorted.bam
+```
+
+See how much smaller the `.bam` file is?
+```
+$ du -sh SH009.aligned.sam
+```
+
+Once we have the `.bam` file we can use `samtools flagstat` to check how many reads mapped to the reference.
+```
+$ samtools flagstat SH009.aligned.sorted.bam
+```
+
+We can also visualize the alignment with `samtools tview`. You can scroll with the arrow keys on your keyboard, or type `?` for a menu of options. 
+```
+$ samtools tview SH009.aligned.sorted.bam Sther_PMEI.fasta
+```
 
 ## 2d. Variant calling:
-We will continue with the Data Carpentry tutorial using **bcftools** for variant calling. Note, there are many programs available to perform variant calling; **bcftools** is just one of them.
+There are many programs available to perform variant calling; for now we will keep following the Data Carpentry tutorial and use `bcftools`. 
 
-## 2e. Assess the alignment:
+`bcftools` first counts read coverage at each position. The flag `-O b` tells `bcftools` to generate a bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome.
+```
+$ bcftools mpileup -O b -o SH009_raw.bcf -f Sther_PMEI.fasta SH009.aligned.sorted.bam
+```
 
+Next, call single nucleotide polymorphisms (SNPs).  Specify ploidy with `--ploidy`, `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
+```
+$ bcftools call --ploidy 2 -m -v -o SH009_variants.vcf SH009_raw.bcf 
+```
+
+Most pipelines also involve a filtering step after variant calling, which can vary according to the specific project. For now, let's inspect the `.vcf` file, one of the standard file format for genomic variants!
