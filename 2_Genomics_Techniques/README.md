@@ -1,12 +1,12 @@
 # Session 2: Genomics Techniques
-This session will provide an overview for understanding FASTQ file formats, interpreting read quality, mapping to a reference, and calling genomic variants. It is derived from the [Data Wrangling and Processing for Genomics Lesson](https://datacarpentry.org/wrangling-genomics/) from [Data Carpentry](https://datacarpentry.org/lessons/) which provides a much better and in-depth view of these topics. However, rather than running the analyses on a pre-imaged Amazon Web Service instance, we will try to facilitate analysis on your local machine, though it will require some patience with software installation. A smaller dataset (instead of the <i>E. coli</i> used for the Data Carpentry lession) is provided to help each step run more quickly. 
+This session will provide an overview for understanding FASTQ file formats, interpreting read quality, mapping to a reference, and calling genomic variants. It is derived from the [Data Wrangling and Processing for Genomics Lesson](https://datacarpentry.org/wrangling-genomics/) from [Data Carpentry](https://datacarpentry.org/lessons/) which provides a much better and in-depth view of these topics. However, rather than running the analyses on a pre-imaged Amazon Web Service instance, we will try to facilitate analysis on your local machine, though it will require some more patience with software installation. A smaller dataset (instead of the <i>E. coli</i> used for the Data Carpentry lession) is provided to help each step run more quickly. 
 
 ## Prior to the session: 
 1. **(WINDOWS ONLY): Download and install Cygwin.**  Cygwin provides a Linux-like environment for Windows. It is built on top of Windows, but allows you to interact with your computer using Linux commands. Follow the instructions [here](http://www1.udel.edu/CIS/105/pcline/07J/useful-links/cygwin/) to install. Once the installation is complete, you can start using Cygwin by launching it using the desktop shortcut or from the start menu.
 
-2. **Download and install FastQC.** Click the 'Download Now' on the [FastQC website](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and follow the instructions under 'Installation and setup instructions'. Note, FastQC will require 
+2. **Download and install FastQC.** Click 'Download Now' on the [FastQC website](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and follow the instructions under 'Installation and setup instructions'.
 
-3. **Download and install BWA, samtools, and bcftools.** Unfortunately, these programs are only available for MacOS and Linux systems. Participants are welcome to follow along during the workshop even if they are not able to run the analyses on their own machine. Alternatively, some users might be interested in trying out [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10).  You can choose which Linux distribution to install; Ubuntu 18.04 LTS is recommended. However, this workshop hasn't been extensively tested with WSL.
+3. **Download and install BWA, samtools, and bcftools.** Unfortunately, these programs are only available for MacOS and Linux systems. Participants using Windows machines are welcome to follow along during the workshop even if they are not able to run the analyses on their own machine. I have not tested it with these programs, but some users might be interested in trying out [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10).  You can choose which Linux distribution to install; Ubuntu 18.04 LTS should work well.
 
 - **[BWA](http://bio-bwa.sourceforge.net):**
 ```
@@ -33,15 +33,19 @@ $ make
 ---
 
 ## 2a: The FASTQ format:
-See [here](https://datacarpentry.org/wrangling-genomics/02-quality-control/index.html) for an in-depth description.
+See Section 2 [here](https://datacarpentry.org/wrangling-genomics/02-quality-control/index.html) for an in-depth description.
 
-Download the two example files in this repository, x and x. 
+Download the two example files in this repository, `SH009_R1.fastq` and `SH009_R2.fastq`. These files include a subset of reads from a *Striga hermonthica* individual collected in a field of maize in Mumias, Kenya by Emily Bellis, Sylvia Mutinda, Calvins Odero, and Steven Runo on 07/13/2018.
 
-Look at the top of each read file.
+Navigate to the directory on your computer where these files were downloaded. Look at first 5 sequences in each read file. What do you notice about the length of the sequences?
+```
+$ head -n 20 SH009_R1.fastq
+```
 
 How many sequences are in each file?
-
-What do you notice about the length of the sequences?
+```
+$ grep -c '@A00755'
+```
 
 ## 2b: Assessing read quality with FastQC:
 Ensure that FastQC is installed properly.
@@ -51,7 +55,7 @@ Generate a FastQC report on the command-line.
 Alternatively, FastQC can be run interactively using the graphical user interface.
 
 ## 2c. Mapping reads to the reference with BWA:
-See (here)[https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html] for full details. Note, we will be skipping the quality trimming and filtering steps today; the reads in this repository have already been trimmed and filtered using [BBDuk](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/). 
+See Section 4[here](https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html) for full details. Note, we will be skipping the quality trimming and filtering steps today; the reads in this repository have already been trimmed and filtered using [BBDuk](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/). 
 
 ## 2d. Variant calling:
 We will continue with the Data Carpentry tutorial using **bcftools** for variant calling. Note, there are many programs available to perform variant calling; **bcftools** is just one of them.
