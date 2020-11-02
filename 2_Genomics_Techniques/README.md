@@ -8,7 +8,7 @@ This session will provide an overview for understanding FASTQ file formats, inte
 
 3. **Download and install BWA, samtools, and bcftools.** Unfortunately, these programs are only available for MacOS and Linux systems. Participants are welcome to follow along during the workshop even if they are not able to run the analyses on their own machine. Alternatively, some users might be interested in trying out [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10).  You can choose which Linux distribution to install; Ubuntu 18.04 LTS is recommended. However, this workshop hasn't been extensively tested with WSL.
 
- > **[BWA](http://bio-bwa.sourceforge.net):**
+   **[BWA](http://bio-bwa.sourceforge.net):**
   ```
 $ curl -OL http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.17.tar.bz2
 $ tar jxvf bwa-0.7.17.tar.bz2
@@ -16,7 +16,7 @@ $ cd bwa-0.7.17
 $ make
 ```
 
-- **[samtools](http://samtools.sourceforge.net):**
+  **[samtools](http://samtools.sourceforge.net):**
 ```
 $ curl -OkL https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
 $ tar jxvf samtools-1.9.tar.bz2
@@ -24,7 +24,7 @@ $ cd samtools-1.9
 $ make
 ```
 
-- **[bcftools](http://samtools.github.io/bcftools/bcftools.html):**
+  **[bcftools](http://samtools.github.io/bcftools/bcftools.html):**
 ```
 $ curl -OkL https://github.com/samtools/bcftools/releases/download/1.8/bcftools-1.8.tar.bz2
 $ tar jxvf bcftools-1.8.tar.bz2
