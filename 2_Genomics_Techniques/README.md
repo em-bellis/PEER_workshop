@@ -6,7 +6,6 @@ This session will provide an overview for understanding FASTQ file formats, inte
 
 2. **Download and install FastQC.** Click the 'Download Now' on the [FastQC website](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and follow the instructions under 'Installation and setup instructions'. Note, FastQC will require 
 
----
 3. **Download and install BWA, samtools, and bcftools.** Unfortunately, these programs are only available for MacOS and Linux systems. Participants are welcome to follow along during the workshop even if they are not able to run the analyses on their own machine. Alternatively, some users might be interested in trying out [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10).  You can choose which Linux distribution to install; Ubuntu 18.04 LTS is recommended. However, this workshop hasn't been extensively tested with WSL.
 
 - **[BWA](http://bio-bwa.sourceforge.net):**
@@ -33,3 +32,4 @@ $ make
 ```
 ---
 
+## Overview: 
