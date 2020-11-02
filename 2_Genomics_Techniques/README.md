@@ -49,7 +49,7 @@ Generate a FastQC report on the command-line.
 Alternatively, FastQC can be run interactively using the graphical user interface.
 
 ## 2c. Mapping reads to the reference with BWA:
-See (here)[https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html] for full details. Note, we will be skipping the quality trimming and filtering steps today; the reads in this repository have already been trimmed and filtered using (BBDuk)[https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/]. 
+See (here)[https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html] for full details. Note, we will be skipping the quality trimming and filtering steps today; the reads in this repository have already been trimmed and filtered using [BBDuk](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/). 
 
 ## 2d. Variant calling:
 We will continue with the Data Carpentry tutorial using **bcftools** for variant calling. Note, there are many programs available to perform variant calling; **bcftools** is just one of them.
