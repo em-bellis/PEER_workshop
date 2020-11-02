@@ -41,7 +41,7 @@ Look at the top of each read file.
 
 How many sequences are in each file?
 
-## 2b: Assessing Quality with FastQC:
+## 2b: Assessing read quality with FastQC:
 Ensure that FastQC is installed properly.
 
 Generate a FastQC report on the command-line.
