@@ -8,7 +8,7 @@ This session will provide an overview for understanding FASTQ file formats, inte
 
 3. **Download and install BWA, samtools, and bcftools.** Unfortunately, these programs are only available for MacOS and Linux systems. Participants are welcome to follow along during the workshop even if they are not able to run the analyses on their own machine. Alternatively, some users might be interested in trying out [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10).  You can choose which Linux distribution to install; Ubuntu 18.04 LTS is recommended. However, this workshop hasn't been extensively tested with WSL.
 
- - **[BWA](http://bio-bwa.sourceforge.net):**
+ > **[BWA](http://bio-bwa.sourceforge.net):**
   ```
 $ curl -OL http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.17.tar.bz2
 $ tar jxvf bwa-0.7.17.tar.bz2
