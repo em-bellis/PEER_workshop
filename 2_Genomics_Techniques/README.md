@@ -33,11 +33,11 @@ $ make
 ---
 
 ## 2a: The FASTQ format:
-See Section 2 [here](https://datacarpentry.org/wrangling-genomics/02-quality-control/index.html) for an in-depth description.
+See Section 2 of the Data Carpentry lesson [here](https://datacarpentry.org/wrangling-genomics/02-quality-control/index.html) for an in-depth description.
 
 Download the two example files in this repository, `SH009_R1.fastq` and `SH009_R2.fastq`. These files include a subset of reads from a *Striga hermonthica* individual collected in a field of maize in Mumias, Kenya by Emily Bellis, Sylvia Mutinda, Calvins Odero, and Steven Runo on 07/13/2018.
 
-Navigate to the directory on your computer where these files were downloaded. Look at first 5 sequences in each read file. What do you notice about the length of the sequences?
+Navigate to the directory on your computer where these files were downloaded. Look at first 5 sequences in each read file using the `head` command. What do you notice about the length of the sequences?
 ```
 $ head -n 20 SH009_R1.fastq
 ```
