@@ -54,7 +54,7 @@ Ensure that FastQC is installed properly. We can run it with the `-h` flag to pr
 $ fastqc -h
 ```
 
-Now, generate a FastQC report for each of the read files. When run on the comman-line, FastQC will generate an html file as output to display the results.  The `*` is a wildcard character, indicating to the program to perform the operation on any file that ends in `.fastq`. 
+Now, generate a FastQC report for each of the read files. When run on the command-line, FastQC will generate an `.html` file as output to display the results.  The `*` is a wildcard character, indicating to the program to perform the operation on any file that ends in `.fastq`. 
 ```
 $ fastq *.fastq
 ```
