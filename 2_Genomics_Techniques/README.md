@@ -33,7 +33,7 @@ $ make
 ---
 
 ## 2a: The FASTQ format:
-See (here)[https://datacarpentry.org/wrangling-genomics/02-quality-control/index.html] for an in-depth description.
+See [here](https://datacarpentry.org/wrangling-genomics/02-quality-control/index.html) for an in-depth description.
 
 Download the two example files in this repository, x and x. 
 
