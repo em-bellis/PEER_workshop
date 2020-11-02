@@ -1,5 +1,5 @@
 # Session 2: Genomics Techniques
-This session will provide an overview for understanding FASTQ file formats, interpreting read quality, mapping to a reference, and calling genomic variants. It is derived from the [Data Wrangling and Processing for Genomics Lesson](https://datacarpentry.org/wrangling-genomics/) from [Data Carpentry](https://datacarpentry.org/lessons/) which provides a much better and in-depth view of these topics. However, rather than running the analyses on a pre-imaged Amazon Web Service instance, we will try to facilitate analysis on your local machine, though it will require some patience with software installation. A smaller dataset (instead of the <i>E. coli</i> used for the Data Carpentry lession) is also provided. 
+This session will provide an overview for understanding FASTQ file formats, interpreting read quality, mapping to a reference, and calling genomic variants. It is derived from the [Data Wrangling and Processing for Genomics Lesson](https://datacarpentry.org/wrangling-genomics/) from [Data Carpentry](https://datacarpentry.org/lessons/) which provides a much better and in-depth view of these topics. However, rather than running the analyses on a pre-imaged Amazon Web Service instance, we will try to facilitate analysis on your local machine, though it will require some patience with software installation. A smaller dataset (instead of the <i>E. coli</i> used for the Data Carpentry lession) is provided to help each step run more quickly. 
 
 ## Prior to the session: 
 1. **(WINDOWS ONLY): Download and install Cygwin.**  Cygwin provides a Linux-like environment for Windows. It is built on top of Windows, but allows you to interact with your computer using Linux commands. Follow the instructions [here](http://www1.udel.edu/CIS/105/pcline/07J/useful-links/cygwin/) to install. Once the installation is complete, you can start using Cygwin by launching it using the desktop shortcut or from the start menu.
@@ -40,6 +40,8 @@ Download the two example files in this repository, x and x.
 Look at the top of each read file.
 
 How many sequences are in each file?
+
+What do you notice about the length of the sequences?
 
 ## 2b: Assessing read quality with FastQC:
 Ensure that FastQC is installed properly.
