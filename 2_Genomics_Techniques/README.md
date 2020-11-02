@@ -32,4 +32,23 @@ $ make
 ```
 ---
 
-## Overview: 
+## 2a: The FASTQ format:
+See (here)[https://datacarpentry.org/wrangling-genomics/02-quality-control/index.html] for an in-depth description.
+
+Download the two example files in this repository, x and x. 
+
+Look at the top of each read file.
+
+How many sequences are in each file?
+
+## 2b: Assessing Quality with FastQC:
+Ensure that FastQC is installed properly.
+
+Generate a FastQC report on the command-line.
+
+Alternatively, FastQC can be run interactively using the graphical user interface.
+
+## 2c. Mapping reads to the reference with BWA:
+See (here)[https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html] for full details. Note, we will be skipping the quality trimming and filtering steps today; the reads in this repository have already been trimmed and filtered using (BBDuk)[https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/]. 
+
+## 2d. 
