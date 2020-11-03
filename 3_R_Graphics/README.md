@@ -10,6 +10,8 @@ This session will provide an introduction to visualizing data with `ggplot2`.  W
 
 ## 3a: Load required packages and data
 We will be using `ggplot2` which is part of the 'tidyverse'. We only need to install the package once, and then we can load the library each time we open R Studio.
+
+All the following commands take place within the Console of R Studio.
 ```
 > install.packages('tidyverse')
 > library(tidyverse)
@@ -17,5 +19,10 @@ We will be using `ggplot2` which is part of the 'tidyverse'. We only need to ins
  
 Since we are not following the Data Carpentry lesson from the beginning, we also need to download the example file separately. I have provided the example file in this repository, `surveys_complete.csv`, so carrying out the previous steps in the Data Carpentry lesson is not necessary.
 ```
-> surveys_complete <- read_csv("data/surveys_complete.csv")
+> surveys_complete <- read_csv("surveys_complete.csv")
 ```
+
+## 3b: 
+To build a ggplot, we will use the following basic template that can be used for different types of plots:
+
+ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
