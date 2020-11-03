@@ -24,3 +24,5 @@ Since we are not following the Data Carpentry lesson from the beginning, we also
 
 ## 3b: Intro to `ggplot2`
 We can now follow pretty closely the [Data Visualization with ggplot2 tutorial](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html) to practice making scatter plots, box plots, and time series plots with `ggplot2`.
+
+For more tips on making graphs with `ggplot`, [The R Graphics Cookbook](https://r-graphics.org) is really great!
