@@ -22,7 +22,5 @@ Since we are not following the Data Carpentry lesson from the beginning, we also
 > surveys_complete <- read_csv("surveys_complete.csv")
 ```
 
-## 3b: 
-To build a ggplot, we will use the following basic template that can be used for different types of plots:
-
-ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
+## 3b: Intro to `ggplot2`
+We can now follow pretty closely the [Data Visualization with ggplot2 tutorial](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html) to practice making scatter plots, box plots, and time series plots with `ggplot2`.
