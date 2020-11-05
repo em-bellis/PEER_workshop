@@ -36,7 +36,7 @@ $ make
 ## 2a: The FASTQ format:
 See Section 2 of the Data Carpentry lesson [here](https://datacarpentry.org/wrangling-genomics/02-quality-control/index.html) for an in-depth description.
 
-1. Download the two example files in this repository, `SH009_R1.fastq` and `SH009_R2.fastq` to a new working directory. These files include a subset of reads from a *Striga hermonthica* individual collected in a field of maize in Mumias, Kenya by Emily Bellis, Sylvia Mutinda, Calvins Odero, and Steven Runo in 2018.
+1. Download the two example files in this repository, `SH009_R1.fastq` and `SH009_R2.fastq` to a new working directory. These files include a subset of genomic reads from a *Striga hermonthica* individual collected in a field of maize in Mumias, Kenya by Emily Bellis, Sylvia Mutinda, Calvins Odero, and Steven Runo in 2018.
 
 2. Navigate to the directory on your computer where these files were downloaded. Inspect the first sequence in each read file using the `head` command. Is this sequence of good quality?
 ```
