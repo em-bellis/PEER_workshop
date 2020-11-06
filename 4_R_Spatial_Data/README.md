@@ -1,7 +1,7 @@
 # Session 4: Spatial Data 
-In this session, we will create a map of Kenya, with outlines of the counties in western Kenya. On this map we will overlay a set of points, in this case locations where *Striga hermonthica* was collected in 2018. Much of the code is adapted from the tutorial [here](https://rpubs.com/spoonerf/countrymapggplot2). 
+In this session, we will create a map of Kenya, with outlines of the counties in western Kenya. On this map we will overlay a set of points, in this case locations where *Striga hermonthica* was collected in 2018.  Much of the code is adapted from the tutorial [here](https://rpubs.com/spoonerf/countrymapggplot2). 
 
-For continued learning, Data Carpentry also has a tutorial for geospatial data in R [here](https://datacarpentry.org/r-raster-vector-geospatial/), but we won't really be drawing on it much today. But my favorite tutorials for using R for geospatial data analysis come from [rspatial.org](https://rspatial.org/raster/index.html).
+For continued learning with more in-depth resources, Data Carpentry also has a tutorial for geospatial data in R [here](https://datacarpentry.org/r-raster-vector-geospatial/), though we won't really be drawing on it much today. My favorite tutorials for using R for geospatial data analysis come from [rspatial.org](https://rspatial.org/raster/index.html).
 
 ## Prior to the session: 
 1. **Background reading on geospatial data**.  The material [here](https://datacarpentry.org/organization-geospatial/) has some great information to introduce vector and raster data, coordinate reference systems, and software for working with geospatial data. 
