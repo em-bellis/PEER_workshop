@@ -1,14 +1,12 @@
 # Session 4: Spatial Data 
-This session will provide an introduction to visualizing data with `ggplot2`.  We will follow pretty closely the [Data Analysis and Visualization in R for Ecologists Lesson](https://datacarpentry.org/R-ecology-lesson/index.html) from [Data Carpentry](https://datacarpentry.org/lessons/) which provides a much better and in-depth view of these topics. There are many other parts of this lesson you can check out if you want to. Today we will just focus on the 5th episode: [Data Visualization with ggplot2](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html). 
+In this session, we will create a map of Kenya, with outlines of the counties in western Kenya. On this map we will overlay a set of points, in this case locations where *Striga hermonthica* was collected in 2018.  
 
 ## Prior to the session: 
-1. **Download and install R and R Studio**.  Follow the instructions [here](https://datacarpentry.org/R-ecology-lesson/#Install_R_and_RStudio). 
-
-*Even if you already have R, it is recommended to ensure you are working in R version 4.0 or later. You can check by running the command `version` in the R console.*
+1. **Background reading on geospatial data**.  The material [here](https://datacarpentry.org/organization-geospatial/) has some great information to introduce vector and raster data, coordinate reference systems, and software for working with geospatial data. 
 
 ---
 
-5. Get western Kenya county boundaries for map:
+# 4a. Get data for western Kenya county boundaries:
 # partially following tutorial here https://rpubs.com/spoonerf/countrymapggplot2
 library(maptools)
 library(raster)
