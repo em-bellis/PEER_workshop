@@ -1,4 +1,4 @@
-# Session 3: R Graphics 
+# Session 4: Spatial Data 
 This session will provide an introduction to visualizing data with `ggplot2`.  We will follow pretty closely the [Data Analysis and Visualization in R for Ecologists Lesson](https://datacarpentry.org/R-ecology-lesson/index.html) from [Data Carpentry](https://datacarpentry.org/lessons/) which provides a much better and in-depth view of these topics. There are many other parts of this lesson you can check out if you want to. Today we will just focus on the 5th episode: [Data Visualization with ggplot2](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html). 
 
 ## Prior to the session: 
@@ -8,21 +8,18 @@ This session will provide an introduction to visualizing data with `ggplot2`.  W
 
 ---
 
-## 3a: Load required packages and data
-We will be using `ggplot2` which is part of the 'tidyverse'. We only need to install the package once, and then we can load the library each time we open R Studio.
-
-All the following commands take place within the Console of R Studio.
-```
-> install.packages('tidyverse')
-> library(tidyverse)
-```
- 
-Since we are not following the Data Carpentry lesson from the beginning, we also need to download the example file separately. I have provided the example file in this repository, `surveys_complete.csv`, so carrying out the previous steps in the Data Carpentry lesson is not necessary.
-```
-> surveys_complete <- read_csv("surveys_complete.csv")
-```
-
-## 3b: Intro to `ggplot2`
-We can now follow pretty closely the [Data Visualization with ggplot2 tutorial](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html) to practice making scatter plots, box plots, and time series plots with `ggplot2`.
-
-For more tips on making graphs with `ggplot`, [The R Graphics Cookbook](https://r-graphics.org) is available online for free and is really great!
+5. Get western Kenya county boundaries for map:
+# partially following tutorial here https://rpubs.com/spoonerf/countrymapggplot2
+library(maptools)
+library(raster)
+library(plyr)
+library(ggplot2)
+library(rgdal)
+# get polygons for western Kenyan counties
+Kenya1&lt;-getData(&quot;GADM&quot;, country=&quot;KE&quot;, level=1)
+Kenya1_UTM&lt;-spTransform(Kenya1, CRS(&quot;+init=EPSG:32737&quot;))
+counties &lt;-Kenya1_UTM[Kenya1_UTM@data$NAME_1 == &quot;Busia&quot;| Kenya1_UTM@data$NAME_1 == &quot;Kisumu&quot; |
+Kenya1_UTM@data$NAME_1==&quot;Homa Bay&quot;| Kenya1_UTM@data$NAME_1 == &quot;Kericho&quot;|Kenya1_UTM@data$NAME_1 ==
+&quot;Nandi&quot;|Kenya1_UTM@data$NAME_1 == &quot;Vihiga&quot;|Kenya1_UTM@data$NAME_1 == &quot;Siaya&quot;|Kenya1_UTM@data$NAME_1
+== &quot;Kakamega&quot;|Kenya1_UTM@data$NAME_1 == &quot;Kisii&quot;,]
+counties.ll &lt;- spTransform(counties, CRS(&quot;+proj=longlat&quot;))
