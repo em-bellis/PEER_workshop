@@ -67,13 +67,13 @@ There are many strategies for making maps in R! I was recently introduced to the
 
 While `tmaps` can handle SpatialPolygonsDataFrames like the `Kenya1_UTM` object we created, the `sf` class of objects is better supported. We can use the `as` function to convert to `sf` class 
 ```
-counties_sf <- as(counties, Class = "sf")
-kenya_sf <- as(Kenya0_UTM, Class="sf")
+> counties_sf <- as(counties, Class = "sf")
+> kenya_sf <- as(Kenya0_UTM, Class="sf")
 ```
 
 An additional benefit of conversion to the `sf` class is that we can use the `simplify_shape` function from `tmaptools` to reduce the number of coordinates in our polygon objects. This will 'smooth' the outline of the shapes and make for much faster plotting!
 ```
-kenya_smooth <- simplify_shape(kenya_sf, 0.01)
+> kenya_smooth <- simplify_shape(kenya_sf, 0.01)
 ```
 
 Now, make a basic `tmap`, just showing the 'smoothed' outline of Kenya. The syntax of `tmap` is somewhat similar to `ggplot2`. For each 'shape' object (in this case, `kenya_smooth` is the shape object) we can plot multiple layers (in this case, a polygon layer showing the lines of Kenya)
@@ -82,7 +82,7 @@ Now, make a basic `tmap`, just showing the 'smoothed' outline of Kenya. The synt
     tm_polygons() 
 ```
 
-It is possible to use multiple shapes in one plot. For example, we can include shapes for Kenya, and shapes for `counties`, which just has our counties of interest. For each `tmap` element, we can also customize the appearance. For example, drawing polygons for Busia and Kisumu, but also filling them with a color.
+It is possible to use multiple shapes in one plot. For example, we can include the shape object for Kenya, and shape object for `counties`, which just has our counties of interest we specified earlier. For each `tmap` element, we can also customize the appearance. For example, filling the Busia and Kisumu counties with a color.
 ```
 > tm_shape(kenya_smooth) +
     tm_polygons() +
@@ -91,17 +91,26 @@ It is possible to use multiple shapes in one plot. For example, we can include s
 ```
 
 ## 4e. Add points to show sampling locations
+As another example of how we can include multiple shape objects in one plot, lets add points for sampling locations of *Striga hermonthica*.
 
+First, download and read in the `Striga_GPS.csv` file (included in this repository). Convert to a SpatialPointsDataFrame. Don't forget to transform the coordinates to the UTM projection, as we did for our base mapping layers!
 ```
-points <- read.csv('~/Documents/GitHub/PEER_workshop/4_R_Spatial_Data/Striga_GPS.csv', header=T)
-points_df <- SpatialPointsDataFrame(cbind.data.frame(points$Lon, points$Lat),points, proj4string = CRS("+proj=longlat"))
-points_UTM<-spTransform(points_df, CRS("+init=EPSG:32737")) 
+> points <- read.csv('~/Documents/GitHub/PEER_workshop/4_R_Spatial_Data/Striga_GPS.csv', header=T)
+> points_df <- SpatialPointsDataFrame(cbind.data.frame(points$Lon, points$Lat),points, proj4string = CRS("+proj=longlat"))
+> points_UTM<-spTransform(points_df, CRS("+init=EPSG:32737")) 
+```
+Then, add a `tm_shape` for the sampling locations, and a `tm_dots` layer to plot the points. In addition to setting the layer to a single color, we can map 'color' to one of the variables in the `points_UTM` object, in this case the column indicating elevation (in feet).  We can also add a scale bar!
+```
+> tm_shape(kenya_smooth) +
+    tm_polygons() +
+  tm_shape(counties) + 
+    tm_polygons() +
+  tm_shape(points_UTM) +
+    tm_dots(col="Elevation_ft", size=0.15) +
+  tm_scale_bar(width=0.2)
+```
 
-tm_shape(kenya_smooth) +
-  tm_polygons() +
-tm_shape(counties) + 
-  tm_polygons() +
-tm_shape(points_UTM) +
-  tm_dots(col="red") +
-tm_scale_bar(width=0.2)
+We can change the look of the plot in many ways. To see some of the possibilities, you can always pull up the documentation for a function with, e.g.
+```
+> ?tm_polygons
 ```
