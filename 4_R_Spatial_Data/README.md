@@ -8,43 +8,65 @@ For continued learning, Data Carpentry also has a tutorial for geospatial data i
 
 2. **Install some of the required R packages**. This can be done directly within the R Studio environment through the 'Packages' tab of the bottom left panel or running the following:
 ```
-> install.packages()
+> install.packages(c("rgdal", "raster", "sp"))
 ```
 ---
 
-## 4a. Load required packages:
+## 4a. Load required packages
 ```
-library(maptools)
-library(raster)
-library(plyr)
-library(ggplot2)
-library(rgdal)
+> library(raster)
+> library(rgdal)
+> library(sp)
+> library(ggplot2)
 ```
 
-## 4b. Get polygons for Kenya county boundaries:
+## 4b. Get polygons for Kenya county boundaries
 It can take a couple minutes to download unfortunately...
 ```
 Kenya1<-getData("GADM", country="KE", level=1)
 ```
 
-Also get a map just of the outline of Kenya:
+Also get a polygon just of the outline of Kenya
 ```
+Kenya<-getData("GADM", country="KE", level=0)
 ```
 
+Reproject to UTM coordinate reference system. UTM is a good choice for a regional map covering a relatively small area.
 ```
-Kenya1_UTM<-spTransform(Kenya1, CRS("+init=EPSG:32737"))  
+> Kenya1_UTM<-spTransform(Kenya1, CRS("+init=EPSG:32737")) 
+> Kenya0_UTM<-spTransform(Kenya0, CRS("+init=EPSG:32737")) 
+```
+
+You can check that the reprojection worked by inspecting each Spatial Polygon Data Frame
+```
+> Kenya1_UTM
+> Kenya1
 ```
 
 ## 4c. Choose a subset of counties to include in the map:
+Look at the names of the counties and choose some we'd like to plot
 ```
-counties <-Kenya1_UTM[Kenya1_UTM@data$NAME_1 == "Busia"| Kenya1_UTM@data$NAME_1 == "Kisumu" | Kenya1_UTM@data$NAME_1=="Homa Bay"|  Kenya1_UTM@data$NAME_1 == "Kericho"|Kenya1_UTM@data$NAME_1 == "Nandi"|Kenya1_UTM@data$NAME_1 == "Vihiga"|Kenya1_UTM@data$NAME_1 == "Siaya"|Kenya1_UTM@data$NAME_1 == "Kakamega"|Kenya1_UTM@data$NAME_1 == "Kisii",]
-````
+> Kenya1_UTM@data$NAME_1
+```
 
+We can use the `[` and `]` bracket characters to subset the `Kenya1_UTM` object to just Busia county. We want to include all columns in the data frame associated with Busia where `data$NAME_1` matches "Busia", so we should be sure to include the `,` before the right bracket.
 ```
-counties.ll <- spTransform(counties, CRS("+proj=longlat"))
+Kenya1_UTM[Kenya1_UTM@data$NAME_1 == "Busia",]
+```
+
+We can also use the logical OR `|` character to match multiple counties 
+```
+counties <-Kenya1_UTM[Kenya1_UTM@data$NAME_1 == "Busia"| Kenya1_UTM@data$NAME_1 == "Kisumu",]
 ```
 
 ## 4d. Plot a base map of Kenya, with outlines of the counties of interest
+
+```
+Kenya1_df <- fortify(Kenya1_UTM)
+ggplot() + 
+  geom_polygon(data=Kenya1_df, aes(long,lat,group=group), fill="whitesmoke")+
+  geom_path(data=Kenya1_df, aes(long,lat, group=group), color="grey", size=0.1)
+```
 
 ## 4e. Add points to show sampling locations
 
