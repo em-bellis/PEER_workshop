@@ -64,19 +64,30 @@ We can use the logical OR character, `|`, to match multiple counties
 
 ## 4d. Plot a base map of Kenya, with outlines of the counties of interest
 There are many strategies for making maps in R! I was recently introduced to the `tmaps` package and really like it so far compared to the ways I used to make maps in R :) [tmaps](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html).
+
+While `tmaps` can handle SpatialPolygonsDataFrames like the `Kenya1_UTM` object we created, the `sf` class of objects is better supported. We can use the `as` function to convert to `sf` class 
 ```
-counties_sf <- as(counties, Class = "sf")  #convert to sf class
+counties_sf <- as(counties, Class = "sf")
 kenya_sf <- as(Kenya0_UTM, Class="sf")
+```
 
-kenya_smooth <- simplify_shape(kenya_sf, 0.01) # reduce number of coordinates in polygon to 'smooth' shape and speed up plotting.
+An additional benefit of conversion to the `sf` class is that we can use the `simplify_shape` function from `tmaptools` to reduce the number of coordinates in our polygon objects. This will 'smooth' the outline of the shapes and make for much faster plotting!
+```
+kenya_smooth <- simplify_shape(kenya_sf, 0.01)
+```
 
-tm_shape(kenya_smooth) +
-  tm_polygons() 
+Now, make a basic `tmap`, just showing the 'smoothed' outline of Kenya. The syntax of `tmap` is somewhat similar to `ggplot2`. For each 'shape' object (in this case, `kenya_smooth` is the shape object) we can plot multiple layers (in this case, a polygon layer showing the lines of Kenya)
+```
+> tm_shape(kenya_smooth) +
+    tm_polygons() 
+```
 
-tm_shape(kenya_smooth) +
-  tm_polygons() +
-tm_shape(counties) + 
-  tm_polygons(col="tomato4") + 
+It is possible to use multiple shapes in one plot. For example, we can include shapes for Kenya, and shapes for `counties`, which just has our counties of interest. For each `tmap` element, we can also customize the appearance. For example, drawing polygons for Busia and Kisumu, but also filling them with a color.
+```
+> tm_shape(kenya_smooth) +
+    tm_polygons() +
+  tm_shape(counties) + 
+    tm_polygons(col="tomato4") + 
 ```
 
 ## 4e. Add points to show sampling locations
