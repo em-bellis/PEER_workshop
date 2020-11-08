@@ -63,9 +63,9 @@ We can use the logical OR character, `|`, to match multiple counties
 ```
 
 ## 4d. Plot a base map of Kenya, with outlines of the counties of interest
-There are many strategies for making maps in R! I was recently introduced to the `tmaps` package and really like it so far compared to the ways I used to make maps in R :) [tmaps](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html).
+There are many strategies for making maps in R! I was recently introduced to the [tmap](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html) package and really like it so far compared to the ways I used to make maps in R :).
 
-While `tmaps` can handle SpatialPolygonsDataFrames like the `Kenya1_UTM` object we created, the `sf` class of objects is better supported. We can use the `as` function to convert to `sf` class 
+While `tmap` can handle SpatialPolygonsDataFrames like the `Kenya1_UTM` object we created, the `sf` class of objects is better supported. We can use the `as` function to convert to `sf` class 
 ```
 > counties_sf <- as(counties, Class = "sf")
 > kenya_sf <- as(Kenya0_UTM, Class="sf")
