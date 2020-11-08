@@ -52,31 +52,45 @@ Look at the names of the counties and choose some we'd like to plot
 > Kenya1_UTM@data$NAME_1
 ```
 
-We can use the `[` and `]` bracket characters to subset the `Kenya1_UTM` object to just Busia county. We want to include all columns in the data frame associated with Busia where `data$NAME_1` matches "Busia" (not just individual elements of the object), so we should be sure to include the `,` before the right bracket.
+We can use the `[` and `]` bracket characters to subset the `Kenya1_UTM` object to just Busia county. We want to include all variables in the data frame associated with Busia where `data$NAME_1` matches "Busia" (not just individual elements of the object), so we should be sure to include the `,` before the right bracket.
 ```
 > Kenya1_UTM[Kenya1_UTM@data$NAME_1 == "Busia",]
 ```
 
-We can also use the logical OR `|` character to match multiple counties 
+We can use the logical OR character, `|`, to match multiple counties 
 ```
-counties <-Kenya1_UTM[Kenya1_UTM@data$NAME_1 == "Busia"| Kenya1_UTM@data$NAME_1 == "Kisumu",]
+> counties <-Kenya1_UTM[Kenya1_UTM@data$NAME_1 == "Busia"| Kenya1_UTM@data$NAME_1 == "Kisumu",]
 ```
 
 ## 4d. Plot a base map of Kenya, with outlines of the counties of interest
-[tmaps](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html)
+There are many strategies for making maps in R! I was recently introduced to the `tmaps` package and really like it so far compared to the ways I used to make maps in R :) [tmaps](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html).
 ```
 counties_sf <- as(counties, Class = "sf")  #convert to sf class
 kenya_sf <- as(Kenya0_UTM, Class="sf")
 
-kenya_smooth <- simplify_shape(kenya_sf, 0.001) # reduce number of coordinates in polygon to 'smooth' shape and speed up plotting.
+kenya_smooth <- simplify_shape(kenya_sf, 0.01) # reduce number of coordinates in polygon to 'smooth' shape and speed up plotting.
+
+tm_shape(kenya_smooth) +
+  tm_polygons() 
 
 tm_shape(kenya_smooth) +
   tm_polygons() +
 tm_shape(counties) + 
   tm_polygons(col="tomato4") + 
-
 ```
 
 ## 4e. Add points to show sampling locations
 
+```
+points <- read.csv('~/Documents/GitHub/PEER_workshop/4_R_Spatial_Data/Striga_GPS.csv', header=T)
+points_df <- SpatialPointsDataFrame(cbind.data.frame(points$Lon, points$Lat),points, proj4string = CRS("+proj=longlat"))
+points_UTM<-spTransform(points_df, CRS("+init=EPSG:32737")) 
 
+tm_shape(kenya_smooth) +
+  tm_polygons() +
+tm_shape(counties) + 
+  tm_polygons() +
+tm_shape(points_UTM) +
+  tm_dots(col="red") +
+tm_scale_bar(width=0.2)
+```
