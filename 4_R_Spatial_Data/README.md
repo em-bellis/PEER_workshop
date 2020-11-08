@@ -46,7 +46,7 @@ You can check that the reprojection worked by inspecting each Spatial Polygon Da
 > Kenya1
 ```
 
-## 4c. Choose a subset of counties to include in the map:
+## 4c. Choose a subset of counties to include in the map
 Look at the names of the counties and choose some we'd like to plot
 ```
 > Kenya1_UTM@data$NAME_1
@@ -82,16 +82,16 @@ Now, make a basic `tmap`, just showing the 'smoothed' outline of Kenya. The synt
     tm_polygons() 
 ```
 
-It is possible to use multiple shapes in one plot. For example, we can include the shape object for Kenya, and shape object for `counties`, which just has our counties of interest we specified earlier. For each `tmap` element, we can also customize the appearance. For example, filling the Busia and Kisumu counties with a color.
+It is possible to use multiple shapes in one plot. For example, we can include the shape object for Kenya, and shape object for `counties`, which just has the counties of interest we specified earlier. For each `tmap` element, we can customize the appearance for example, filling the Busia and Kisumu counties with color.
 ```
 > tm_shape(kenya_smooth) +
     tm_polygons() +
   tm_shape(counties) + 
-    tm_polygons(col="tomato4") + 
+    tm_polygons(col="tomato4") 
 ```
 
 ## 4e. Add points to show sampling locations
-As another example of how we can include multiple shape objects in one plot, lets add points for sampling locations of *Striga hermonthica*.
+As another example of how we can include multiple shape objects in one plot, lets add points to show the sampling locations of *Striga hermonthica*.
 
 First, download and read in the `Striga_GPS.csv` file (included in this repository). Convert to a SpatialPointsDataFrame. Don't forget to transform the coordinates to the UTM projection, as we did for our base mapping layers!
 ```
@@ -99,7 +99,7 @@ First, download and read in the `Striga_GPS.csv` file (included in this reposito
 > points_df <- SpatialPointsDataFrame(cbind.data.frame(points$Lon, points$Lat),points, proj4string = CRS("+proj=longlat"))
 > points_UTM<-spTransform(points_df, CRS("+init=EPSG:32737")) 
 ```
-Then, add a `tm_shape` for the sampling locations, and a `tm_dots` layer to plot the points. In addition to setting the layer to a single color, we can map 'color' to one of the variables in the `points_UTM` object, in this case the column indicating elevation (in feet).  We can also add a scale bar!
+Then, add a `tm_shape` for the sampling location data, and a `tm_dots` layer to plot the points. An alternative to setting the layer to a single color is to map 'color' to one of the variables in the `points_UTM` object, in this case the column indicating elevation (in feet).  We can also add a scale bar!
 ```
 > tm_shape(kenya_smooth) +
     tm_polygons() +
