@@ -57,7 +57,7 @@ $ fastqc -h
 
 2. Now, generate a FastQC report for each of the read files. When run on the command-line, FastQC will generate an `.html` file as output to display the results.  The `*` is a wildcard character, indicating to the program to perform the operation on any file that ends in `.fastq`. 
 ```
-$ fastq *.fastq
+$ fastqc *.fastq
 ```
 
 3. Check out the FastQC output by clicking on the `.html` file to open it.
