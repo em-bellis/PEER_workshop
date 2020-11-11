@@ -98,7 +98,7 @@ $ samtools sort SH009.aligned.bam > SH009.aligned.sorted.bam
 
 7. See how much smaller the `.bam` file is?
 ```
-$ du -sh SH009.aligned.sam
+$ du -sh SH009.aligned.bam
 ```
 
 8. Once we have the `.bam` file we can use `samtools flagstat` to check how many reads mapped to the reference.
