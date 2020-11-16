@@ -103,7 +103,7 @@ $ bcftools mpileup -O b -o SH009_raw.bcf -f Sther_PMEI.fasta SH009.aligned.sorte
 
 2. Next, call single nucleotide polymorphisms (SNPs).  Specify ploidy with `--ploidy`, `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
 ```
-$ bcftools call --ploidy 2 -m -v -o SH009_variants.vcf SH009_raw.bcf 
+$ bcftools call -m -v -o SH009_variants.vcf SH009_raw.bcf 
 ```
 
 3. Most pipelines also involve a filtering step after variant calling, which can vary according to the specific project. For now, let's inspect the `.vcf` file, one of the standard file format for genomic variants!
