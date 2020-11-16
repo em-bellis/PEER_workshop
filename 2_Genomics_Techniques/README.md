@@ -36,8 +36,16 @@ $ fastqc *.fastq
 
 Alternatively, [FastQC can be run interactively](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/INSTALL.txt) using the graphical user interface. 
 
-## 2c. Mapping reads to the reference with BWA (MacOS/Linux):
-See Section 4 [here](https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html) for full details. Note, we will be skipping the quality trimming and filtering steps (Section 3) today; the reads we are using have already been trimmed and filtered using [BBDuk](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/).
+## 2c. (Optional for this workshop) Trimming with Trimmomatic:
+If time permits, we can practice quality trimming these reads with Trimmomatic, e.g.:
+```
+$ trimmomatic PE SH009_1.fastq SH009_2.fastq SH009_1.trim.fastq.gz SH009_1.untrim.fastq.gz SH009_1.trim.fastq.gz SH009_1.untrim.fastq.gz SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 
+```
+
+How many reads were removed using these parameters? What if we wanted to implement a higher stringency filter?
+
+## 2d. Mapping reads to the reference with BWA (MacOS/Linux):
+See Section 4 [here](https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html) for full details. Note, we may skip the quality trimming and filtering steps (Section 3) today; the reads we are using have already been trimmed and filtered using [BBDuk](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/).
 
 1. First, we must download the reference. It will be easiest if you download to the same directory where you have the read files. The reference we are using as an example is actually just 1 sequence, that of a transcript for a pectin methylesterase inhibitor gene from *Striga hermonthica*.  Typically though we would use a genome reference consisting of multiple chromosomes or contigs.
 
@@ -83,7 +91,7 @@ $ samtools flagstat SH009.aligned.sorted.bam
 $ samtools tview SH009.aligned.sorted.bam Sther_PMEI.fasta
 ```
 
-## 2d. Variant calling:
+## 2e. Variant calling:
 There are many programs available to perform variant calling; for now we will keep following the Data Carpentry tutorial and use `bcftools`. 
 
 1. `bcftools` first counts read coverage at each position. The flag `-O b` tells `bcftools` to generate a bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome.
