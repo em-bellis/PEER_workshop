@@ -97,8 +97,10 @@ $ samtools tview SH009.aligned.sorted.bam Sther_PMEI.fasta
 There are many programs available to perform variant calling; for now we will keep following the Data Carpentry tutorial and use `bcftools`. 
 
 1. `bcftools` first counts read coverage at each position. The flag `-O b` tells `bcftools` to generate a bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome.
+
+We also use the `-A` flag (unlike the Data Carpentry tutorial) due to the fact that most of our mapped reads are orphans.
 ```
-$ bcftools mpileup -O b -o SH009_raw.bcf -f Sther_PMEI.fasta SH009.aligned.sorted.bam
+$ bcftools mpileup -A -O b -o SH009_raw.bcf -f Sther_PMEI.fasta SH009.aligned.sorted.bam
 ```
 
 2. Next, call single nucleotide polymorphisms (SNPs).  Specify ploidy with `--ploidy`, `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
