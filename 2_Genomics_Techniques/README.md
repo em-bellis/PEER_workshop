@@ -51,7 +51,7 @@ See Section 4 [here](https://datacarpentry.org/wrangling-genomics/04-variant_cal
 
 2. Inside the directory where you have the file, inspect the reference sequence. It is a `.fasta` file, with the sequence id preceded by a `>` on one line, followed by the sequence on the following lines. In this case the sequence is wrapped across several lines.  
 ```
-$ cat Sther_PMEI.fasta 
+$ cat Sther_PMEI.fasta
 ```
 
 3. Next, index the reference sequence with `bwa`. Unless you have added the bwa program to your PATH environment variable (outside the scope of this workshop), you may need to specify the full file path to where you downloaded the bwa program. 
@@ -62,7 +62,8 @@ $ bwa index Sther_PMEI.fasta
 4. Then, map the forward and reverse read files for sample 'SH009' to the reference with the `bwa mem` algorithm. After the mapping has finished, we can inspect the resulting `.sam` file since it is a human readable format.
 ```
 $ bwa mem Sther_PMEI.fasta SH009_R1.fastq SH009_R2.fastq > SH009.aligned.sam 
-$ cat SH009.aligned.sam
+$ head SH009.aligned.sam
+$ tail SH009.aligned.sam
 ```
 
 5. This file is actually pretty small! Most `.sam` files can be much bigger. See how big it is with:
