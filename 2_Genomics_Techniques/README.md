@@ -87,8 +87,9 @@ $ du -sh SH009.aligned.bam
 $ samtools flagstat SH009.aligned.sorted.bam
 ```
 
-9. We can also visualize the alignment with `samtools tview`. You can scroll with the arrow keys on your keyboard, or type `?` for a menu of options. 
+9. We can also visualize the alignment with `samtools tview`. You can scroll with the arrow keys on your keyboard, or type `?` for a menu of options. The bamfile must be indexed first.
 ```
+$ samtools index SH009.aligned.sorted.bam
 $ samtools tview SH009.aligned.sorted.bam Sther_PMEI.fasta
 ```
 
