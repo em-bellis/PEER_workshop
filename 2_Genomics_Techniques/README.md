@@ -59,7 +59,7 @@ $ cat Sther_PMEI.fasta
 $ bwa index Sther_PMEI.fasta
 ```
 
-4. Then, map the forward and reverse read files for sample 'SH009' to the reference with the `bwa mem` algorithm. After the mapping has finished, we can inspect the resulting `.sam` file since it is a human readable format.
+4. Then, map the forward and reverse read files for sample 'SH009' to the reference with the `bwa mem` algorithm. After the mapping has finished, we can inspect the resulting `.sam` file since it is a human readable format. More information about the SAM format can be found [here](https://samtools.github.io/hts-specs/SAMv1.pdf)
 ```
 $ bwa mem Sther_PMEI.fasta SH009_R1.fastq SH009_R2.fastq > SH009.aligned.sam 
 $ head SH009.aligned.sam
