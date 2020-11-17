@@ -83,7 +83,9 @@ You can save figures as a pdf
 ```
 ### 3d. Loading Data 
 ```
-surveys_complete <- read.csv("surveys_complete.csv")
+> getwd()
+> setwd("/path/to/folder/") # optional
+> surveys_complete <- read.csv("surveys_complete.csv")
 ```
 
 ## Part II: R as a software environment
