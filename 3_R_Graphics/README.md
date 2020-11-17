@@ -1,5 +1,7 @@
 # Session 3: R Graphics 
-This session will provide an introduction to visualizing data with `ggplot2`.  We will follow pretty closely the [Data Analysis and Visualization in R for Ecologists Lesson](https://datacarpentry.org/R-ecology-lesson/index.html) from [Data Carpentry](https://datacarpentry.org/lessons/) which provides a much better and in-depth view of these topics. There are many other parts of this lesson you can check out if you want to. Today we will just focus on the 5th episode: [Data Visualization with ggplot2](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html). 
+This session is designed in two parts. First, we will provide an brief overview of R as a programming language based on the Chapter 2 Lab from [Introduction to Statistical Learning](http://faculty.marshall.usc.edu/gareth-james/ISL/code.html) by James, Witten, Hastie and Tibshirani, available as a free pdf.  There is also a [Programming with R](http://swcarpentry.github.io/r-novice-inflammation/) lesson from [Software Carpentry](https://software-carpentry.org).
+
+Then, we will introduce R as a software environment, learning to visualize data with `ggplot2`.  We will follow pretty closely the [Data Analysis and Visualization in R for Ecologists Lesson](https://datacarpentry.org/R-ecology-lesson/index.html) from [Data Carpentry](https://datacarpentry.org/lessons/) for this second part. There are many other parts of this lesson you can check out if you want to. Today we will just focus on the 5th episode: [Data Visualization with ggplot2](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html). 
 
 If time permits, we will test our skills by importing the vcf file we made yesterday, and visualizing coverage and other quality information using the [vcfR](https://cran.r-project.org/web/packages/vcfR/vignettes/intro_to_vcfR.html) package.
 
@@ -9,11 +11,81 @@ If time permits, we will test our skills by importing the vcf file we made yeste
 *Even if you already have R, it is recommended to ensure you are working in R version 4.0 or later. You can check by running the command `version` in the R console.*
 
 ---
+All the following commands take place within the console of R/R Studio.
 
-## 3a: Load required packages and data
+## Part I: R as a programming language
+### 3a: Basic commands
+R uses functions to perform operations. For example, the function `c()` can be used to create a vector of numbers. The assignment operator `<-` tells R to store the vector of numbers as an object named `x`.
+```
+> x <- c(1,3,2,5)
+> x
+```
+To pull up the documentation for a function, in R we use `?`.
+```
+> ?c
+```
+We can tell R to add numbers, or even vectors together
+```
+> 4 + 5
+> y <- c(1,4,3)
+> x + y
+```
+We can use `ls()` to list all objects that we have saved so far, and `rm()` to remove
+```
+> ls()
+> rm(x,y)
+```
+We can create a matrix of numbers to learn how R creates objects like matrices
+```
+> x <- matrix(data=c(1,2,3,4), nrow=2, ncol=2)
+> x # the hashtag precedes any comments that are not interpreted by R
+> x <- matrix(c(1,2,3,4), 2, 2, byrow=2) # we don't always need to specificy the names of the arguments passed in; byrow fills the matrices in order of rows
+> sqrt(x)
+> x^2
+```
+It can be useful to generate a vector of random normal variables. For example, here we can create two correlated sets of numbers, and calculate some basic statistics
+```
+> x <- rnorm(50) # by default, mean = 0, sd = 1
+> y <- rnorm(50, mean = 50, sd=0.1)
+> cor(x,y)
+> mean(x)
+> var(x)
+```
+If we want to reproduce the exact same set of random numbers, we can use `set.seed()`
+```
+> set.seed(50)
+> rnorm(50)
+```
+
+### 3b. Graphics
+In base R, we can graph data. We will get more into visualization later on with `ggplot`...
+```
+> plot(x, y)
+> plot(x, y, xlab="this is the x", ylab="this is the y", main="plot of x vs y", col="red")
+```
+You can save figures as a pdf
+```
+> pdf("Figure1.pdf")
+> plot(x,y, col="green")
+> dev.off()
+```
+
+### 3c. Indexing Data
+```
+> A <- matrix(1:16, 4, 4)
+> A
+> A[2,3] # selects element in 2nd row and 3rd column
+> A[1:3, 2:4] # select multiple rows at a time
+> A[1:2, ] # select first two rows and all columns
+> A[, 1:2] # select all rows and first two columns
+> A[-c(1,3),] # keep all rows except 1 and 3 and all columns
+> dim(A) # the dimensions of A
+```
+
+## Part II: R as a software environment
+
+### 3a: Load required packages and data
 We will be using `ggplot2` which is part of the 'tidyverse'. We only need to install the package once, and then we can load the library each time we open R Studio.
-
-All the following commands take place within the Console of R Studio.
 ```
 > install.packages('tidyverse')
 > library(tidyverse)
