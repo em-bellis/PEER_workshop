@@ -88,8 +88,22 @@ You can save figures as a pdf
 > surveys_complete <- read.csv("surveys_complete.csv")
 ```
 
-## Part II: R as a software environment
+Once you have loaded a data file, there are a few ways to inspect it.
+```
+> names(surveys_complete) # what variables are included?
+> str(surveys_complete # this is an important one! 99% of R issues are caused by errors in numbers being interpreted as factors...
+> summary(surveys_complete) # missing data? can be removed with na.omit
+> dim(surveys_complete) # what are the dimensions?
+> class(surveys_complete) # what kind of object is this?
+```
 
+With data frames, you can select a particular variable with `$`
+```
+> surveys_complete$species
+> surveys_complete$species[2] # select just the second element of this vector
+> unique(surveys_complete$species) # unique elements
+```
+## Part II: R as a software environment
 ### 3e: Load required packages and data
 We will be using `ggplot2` which is part of the 'tidyverse'. We only need to install the package once, and then we can load the library each time we open R Studio.
 ```
