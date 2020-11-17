@@ -81,6 +81,10 @@ You can save figures as a pdf
 > A[-c(1,3),] # keep all rows except 1 and 3 and all columns
 > dim(A) # the dimensions of A
 ```
+### 3d. Loading Data 
+```
+surveys_complete <- read.csv("surveys_complete.csv")
+```
 
 ## Part II: R as a software environment
 
@@ -93,7 +97,7 @@ We will be using `ggplot2` which is part of the 'tidyverse'. We only need to ins
  
 Since we are not following the Data Carpentry lesson from the beginning, we also need to download the example file separately. I have provided the example file in this repository, `surveys_complete.csv`, so carrying out the previous steps in the Data Carpentry lesson is not necessary.
 ```
-> surveys_complete <- read_csv("surveys_complete.csv")
+> surveys_complete <- read_csv("surveys_complete.csv") # part of tidyverse package, a bit faster than read.csv for large files
 ```
 
 ## 3b: Intro to `ggplot2`
