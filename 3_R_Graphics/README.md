@@ -58,7 +58,7 @@ If we want to reproduce the exact same set of random numbers, we can use `set.se
 ```
 
 ### 3b. Graphics
-In base R, we can graph data. We will get more into visualization later on with `ggplot`...
+We can graph data very easily in base R. We will get more into visualization later on with `ggplot`...
 ```
 > plot(x, y)
 > plot(x, y, xlab="this is the x", ylab="this is the y", main="plot of x vs y", col="red")
@@ -88,7 +88,7 @@ surveys_complete <- read.csv("surveys_complete.csv")
 
 ## Part II: R as a software environment
 
-### 3a: Load required packages and data
+### 3e: Load required packages and data
 We will be using `ggplot2` which is part of the 'tidyverse'. We only need to install the package once, and then we can load the library each time we open R Studio.
 ```
 > install.packages('tidyverse')
@@ -100,7 +100,7 @@ Since we are not following the Data Carpentry lesson from the beginning, we also
 > surveys_complete <- read_csv("surveys_complete.csv") # part of tidyverse package, a bit faster than read.csv for large files
 ```
 
-## 3b: Intro to `ggplot2`
+## 3f: Intro to `ggplot2`
 We can now follow pretty closely the [Data Visualization with ggplot2 tutorial](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html) to practice making scatter plots, box plots, and time series plots with `ggplot2`.
 
 For more tips on making graphs with `ggplot`, [The R Graphics Cookbook](https://r-graphics.org) is available online for free and is really great!
