@@ -105,7 +105,7 @@ With data frames, you can select a particular variable with `$`
 ```
 ## Part II: R as a software environment
 ### 3e: Load required packages and data
-We will be using `ggplot2` which is part of the 'tidyverse'. We only need to install the package once, and then we can load the library each time we open R Studio.
+We will be using `ggplot2` which is part of the 'tidyverse'. We only need to install the package once, and then we can load the library each time we open R Studio. The `tidyverse` packages includes several packages which are part of the tidyverse ecosystem.
 ```
 > install.packages('tidyverse')
 > library(tidyverse)
@@ -113,8 +113,16 @@ We will be using `ggplot2` which is part of the 'tidyverse'. We only need to ins
  
 Since we are not following the Data Carpentry lesson from the beginning, we also need to download the example file separately. I have provided the example file in this repository, `surveys_complete.csv`, so carrying out the previous steps in the Data Carpentry lesson is not necessary.
 ```
-> surveys_complete <- read_csv("surveys_complete.csv") # part of tidyverse package, a bit faster than read.csv for large files
+> surveys <- read_csv("surveys_complete.csv") # part of tidyverse package, a bit faster than read.csv for large files
 ```
+
+We will be spending most of our time today on plotting, but there are some excellent packages in the tidyverse ecosystem (e.g. `tidyr`, `dplyr`) for data wrangling, e.g.:
+```
+> surveys %>%
+   filter(weight < 5) %>%
+   select(species_id, sex, weight)
+```
+[Section 4](https://datacarpentry.org/R-ecology-lesson/03-dplyr.html) of the Data Analysis and Visualization in R for Ecologists lesson has a great intro to data wrangling with `dplyr` and `tidyr`. See also the free [R for Data Science)[https://r4ds.had.co.nz] book.
 
 ## 3f: Intro to `ggplot2`
 We can now follow pretty closely the [Data Visualization with ggplot2 tutorial](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html) to practice making scatter plots, box plots, and time series plots with `ggplot2`.
