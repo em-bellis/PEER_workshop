@@ -122,6 +122,8 @@ We will be spending most of our time today on plotting, but there are some excel
    filter(weight < 5) %>%
    select(species_id, sex, weight)
 ```
+Note the characters we use for piping in R, `%>%`, is different than what we learned for Unix/Linux, `|`, although the operation is the same.
+
 [Section 4](https://datacarpentry.org/R-ecology-lesson/03-dplyr.html) of the Data Analysis and Visualization in R for Ecologists lesson has a great intro to data wrangling with `dplyr` and `tidyr`. See also the free [R for Data Science)[https://r4ds.had.co.nz] book.
 
 ## 3f: Intro to `ggplot2`
