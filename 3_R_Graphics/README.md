@@ -116,13 +116,13 @@ Since we are not following the Data Carpentry lesson from the beginning, we also
 > surveys <- read_csv("surveys_complete.csv") # part of tidyverse package, a bit faster than read.csv for large files
 ```
 
-We will be spending most of our time today on plotting, but there are some excellent packages in the tidyverse ecosystem (e.g. `tidyr`, `dplyr`) for data wrangling, e.g.:
+We will be spending most of our time today on plotting, but there are some excellent packages in the tidyverse ecosystem (e.g. `tidyr`, `dplyr`) for data wrangling. The tidyverse packages have a bit different syntax than base R. 
 ```
 > surveys %>%
    filter(weight < 5) %>%
    select(species_id, sex, weight)
 ```
-Note the characters we use for piping in R, `%>%`, is different than what we learned for Unix/Linux, `|`, although the operation is the same.
+Note the set of characters we use for piping with tidyverse syntax, `%>%`, is different than what we learned for Unix/Linux, `|`, although the operation is the same.
 
 [Section 4](https://datacarpentry.org/R-ecology-lesson/03-dplyr.html) of the Data Analysis and Visualization in R for Ecologists lesson has a great intro to data wrangling with `dplyr` and `tidyr`. See also the free [R for Data Science)[https://r4ds.had.co.nz] book.
 
