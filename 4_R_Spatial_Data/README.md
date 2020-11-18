@@ -90,7 +90,38 @@ It is possible to use multiple shapes in one plot. For example, we can include t
     tm_polygons(col="tomato4") 
 ```
 
-## 4e. Add points to show sampling locations
+## 4e. Plotting a raster file
+What if, instead of solid colored shapes we want to include gridded data (e.g. a raster image showing annual rainfall)? We can also use tmap to plot layers based on raster files. 
+
+First, let's import an example raster file, `Sther_ENM.tif` available in this repository. This file shows habitat suitability values ouput from an environmental niche model for *Striga hermonthica* described in [Bellis *et al.* (2020)](https://www.pnas.org/content/117/8/4243.short). It has been cropped to approximately the extent of Kenya to make it a bit smaller.
+```
+> enm <- raster('Sther_ENM.tif')
+> enm
+> plot(enm)
+```
+
+We can see that the shape of the raster file is a rectangle. We can clip it to the shape of Kenya. But first we must project to the same coordinate reference system as our Kenya outline object.
+```
+> enm_utm <- projectRaster(enm, crs="+init=EPSG:32737 +proj=utm +zone=37 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0")
+```
+Now, mask the raster using the outline of Kenya, setting all grid cells outside the polygon to 'NA'.
+
+```
+> enm_kenya <- mask(enm_utm, kenya_smooth)
+> plot(enm_kenya)
+```
+
+And voila!
+```
+> tm_shape(enm_kenya) +
+     tm_raster() +
+ tm_shape(kenya_smooth) + 
+     tm_borders() +
+ tm_layout(legend.outside=T) +
+ tm_scale_bar(width=0.1)
+```
+
+## 4f. Add points to show sampling locations
 As another example of how we can include multiple shape objects in one plot, lets add points to show the sampling locations of *Striga hermonthica*.
 
 First, download and read in the `Striga_GPS.csv` file (included in this repository). Convert to a SpatialPointsDataFrame. Don't forget to transform the coordinates to the UTM projection, as we did for our base mapping layers!
