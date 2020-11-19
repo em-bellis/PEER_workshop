@@ -47,7 +47,7 @@ vcftools --vcf freevar.vcf --maf 0.05 --max-maf 0.98 --recode --stdout --max-mis
 ```{r}
 library('vcfR')
 library('dplyr')
-vcf <- read.vcfR("StherPMEI.vcf", verbose = FALSE ) 
+vcf <- read.vcfR("StherPMEI.vcf", verbose = FALSE ) # for the purposes of the PEER workshop, the provided file StherPMEI.vcf just has 11 variants
 x <- vcfR2genlight(vcf)  #1646 binary SNPs
 matx <- as.matrix(x) #convert to matrix
 ```
@@ -81,7 +81,7 @@ get_allele_freqs <- function(genedf) {
   # calculate average allele per site (0 to 2 for all reference and all alternate allele, respectively)
   gene.avg <- as.data.frame(genedf %>%
     group_by(Site) %>%
-    dplyr::summarise_at(vars(-group_cols()),mean,na.rm=TRUE))
+    dplyr::summarise_at(vars(-group_cols()), mean, na.rm=TRUE))
 
   # add a col for number of samples
   gene.avg$n <- as.data.frame(genedf %>% 
@@ -111,10 +111,10 @@ counties <-Kenya1_UTM[Kenya1_UTM@data$NAME_1 == "Busia"| Kenya1_UTM@data$NAME_1 
 counties.ll <- spTransform(counties, CRS("+proj=longlat"))
 ```
 
-**6. Create maps for allele frequency, one gene per output file, where allele frequencies at each location are represented by pie charts:**
+**6. Create maps for allele frequency, one gene per output file, where allele frequencies at each location are represented by pie charts. Each output file will have several images depending of the number of SNPs:**
 ```{r, eval=F}
 library(mapplots)
-geneids <- unique(str_replace(colnames(matx), "_[0-9]+$", ""))
+geneids <- unique(str_replace(colnames(matx), "_[0-9]+$", "")) # create a vector of gene ids
 
 for (j in 1:length(geneids)) {
   tmp <- make_gene_df(geneids[j])
